@@ -2,7 +2,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 
-export default async function AppUserLogin() {
+export default async function UserLogin() {
   const session = await getServerSession(authOptions);
 
   return (

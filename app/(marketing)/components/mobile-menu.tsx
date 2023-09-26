@@ -8,7 +8,7 @@ import {
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import { MdMenu } from "react-icons/md";
-import NavLink from "./NavLink";
+import NavLink from "./nav-link";
 
 export default function MenuMobile() {
   return (

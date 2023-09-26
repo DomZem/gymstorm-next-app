@@ -1,7 +1,7 @@
-import AppMobileMenu from "@/components/AppMobileMenu";
-import AppNav from "@/components/AppNav";
-import AppUserLogin from "@/components/AppUserLogin";
-import { ModeToggle } from "@/components/ModeToggle";
+import AppMobileMenu from "@/app/(application)/components/mobile-menu";
+import AppNav from "@/app/(application)/components/nav";
+import AppUserLogin from "@/app/(application)/components/user-login";
+import { ModeToggle } from "@/components/mode-toggle";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import logo from "@/public/logo.png";
 import { getServerSession } from "next-auth/next";

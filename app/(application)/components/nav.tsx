@@ -1,10 +1,10 @@
 import { IoIosFitness } from "react-icons/io";
 import { MdSportsGymnastics } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
-import AppLink from "./AppLink";
-import AppSignOutButton from "./AppSignOutButton";
+import AppLink from "./nav-link";
+import AppSignOutButton from "./sign-out-button";
 
-export default function AppNav() {
+export default function Nav() {
   return (
     <div className="flex flex-col gap-3">
       <nav className="flex flex-col gap-3">

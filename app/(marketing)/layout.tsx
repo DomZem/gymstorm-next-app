@@ -1,9 +1,10 @@
-import MenuMobile from "@/components/MobileMenu";
-import { ModeToggle } from "@/components/ModeToggle";
-import NavLink from "@/components/NavLink";
-import SignInButton from "@/components/SignInButton";
+import MenuMobile from "@/app/(marketing)/components/mobile-menu";
+import { ModeToggle } from "@/components/mode-toggle";
+
 import logo from "@/public/logo.png";
 import Image from "next/image";
+import NavLink from "./components/nav-link";
+import SignInButton from "./components/sign-in-button";
 
 export default function RootLayout({
   children,

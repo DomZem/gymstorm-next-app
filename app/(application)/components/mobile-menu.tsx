@@ -8,10 +8,10 @@ import {
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import { MdMenu } from "react-icons/md";
-import AppNav from "./AppNav";
-import AppUserLogin from "./AppUserLogin";
+import AppNav from "./nav";
+import AppUserLogin from "./user-login";
 
-export default function AppMobileMenu() {
+export default function MobileMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
