@@ -1,4 +1,5 @@
 import MenuMobile from "@/components/MobileMenu";
+import { ModeToggle } from "@/components/ModeToggle";
 import NavLink from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import logo from "@/public/logo.png";
@@ -18,14 +19,20 @@ export default function RootLayout({
             <h1 className="text-xl font-semibold lg:text-2xl">Gymstorm</h1>
           </div>
 
-          <MenuMobile />
+          <div className="flex items-center gap-2 sm:hidden">
+            <ModeToggle />
+            <MenuMobile />
+          </div>
 
           <nav className="hidden items-center gap-2 sm:flex">
             <NavLink href="/">Home</NavLink>
             <NavLink href="/news">News</NavLink>
           </nav>
 
-          <Button className="hidden sm:block">Sign in</Button>
+          <div className="hidden items-center gap-2 sm:flex">
+            <ModeToggle />
+            <Button>Sign in</Button>
+          </div>
         </div>
       </header>
       <div className="mt-16">{children}</div>

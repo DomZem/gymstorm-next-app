@@ -13,7 +13,7 @@ import NavLink from "./NavLink";
 export default function MenuMobile() {
   return (
     <Sheet>
-      <SheetTrigger className="sm:hidden" asChild>
+      <SheetTrigger asChild>
         <Button variant="outline" size="icon">
           <MdMenu className="text-2xl" />
         </Button>
