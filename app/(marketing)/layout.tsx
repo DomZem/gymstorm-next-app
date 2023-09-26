@@ -1,7 +1,7 @@
 import MenuMobile from "@/components/MobileMenu";
 import { ModeToggle } from "@/components/ModeToggle";
 import NavLink from "@/components/NavLink";
-import { Button } from "@/components/ui/button";
+import SignInButton from "@/components/SignInButton";
 import logo from "@/public/logo.png";
 import Image from "next/image";
 
@@ -31,7 +31,7 @@ export default function RootLayout({
 
           <div className="hidden items-center gap-2 sm:flex">
             <ModeToggle />
-            <Button>Sign in</Button>
+            <SignInButton />
           </div>
         </div>
       </header>
