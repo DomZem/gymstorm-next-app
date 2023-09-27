@@ -19,7 +19,7 @@ export default async function RootLayout({
   }
 
   return (
-    <div className="grid h-screen grid-rows-[4.5rem_1fr]">
+    <div className="grid h-screen grid-rows-[4.5rem_1fr] overflow-hidden">
       <header className="flex items-center justify-between border-b bg-primary-foreground px-3">
         <div className="flex items-center gap-2">
           <Image src={logo} width={32} height={32} alt="gymstorm logo" />
@@ -32,7 +32,7 @@ export default async function RootLayout({
           </div>
         </div>
       </header>
-      <div className="grid grid-cols-[18rem_1fr]">
+      <div className="grid-cols-[18rem_1fr] overflow-hidden md:grid">
         <aside className="hidden flex-col justify-between border-r md:flex">
           <section className="p-6">
             <AppNav />
@@ -41,7 +41,7 @@ export default async function RootLayout({
             <AppUserLogin />
           </section>
         </aside>
-        <main className="p-3 md:p-6">{children}</main>
+        <main className="h-full overflow-hidden p-3 md:p-6">{children}</main>
       </div>
     </div>
   );
