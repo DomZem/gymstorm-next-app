@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import AddExerciseForm from "./add-exercise-form";
 import ExercisesListItem from "./exercises-list-item";
 
 const exercises = [
@@ -31,7 +33,12 @@ export default function ExercisesList() {
       <CardHeader className="flex flex-row items-center justify-between gap-2 border-b">
         <CardTitle>Exercises list</CardTitle>
 
-        <Button variant="outline">Add exercise</Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Add exercise</Button>
+          </DialogTrigger>
+          <AddExerciseForm />
+        </Dialog>
       </CardHeader>
 
       <CardContent className="h-full overflow-hidden p-0">
