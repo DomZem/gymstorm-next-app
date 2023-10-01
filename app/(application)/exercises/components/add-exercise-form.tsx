@@ -15,26 +15,28 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ExerciseDetailType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
 import * as z from "zod";
 
 export const exerciseDetailFormSchema = z.object({
   name: z
     .string()
     .min(1, { message: "Name must contains at least one character" }),
-  avatarUrl: z
-    .string()
-    .includes("https", {
-      message: "Avatar URL must contains https",
-    })
-    .optional(),
+  avatarUrl: z.string().optional(),
   avatarFallback: z.string().min(1, {
     message: "Avatar fallback must contains at least one character",
   }),
 });
 
 export default function AddExerciseForm() {
+  const queryClient = useQueryClient();
+  let exerciseId: string = "exercise";
+
   const form = useForm<z.infer<typeof exerciseDetailFormSchema>>({
     resolver: zodResolver(exerciseDetailFormSchema),
     defaultValues: {
@@ -46,8 +48,27 @@ export default function AddExerciseForm() {
 
   const { control, handleSubmit, reset } = form;
 
-  const onSubmit = (values: z.infer<typeof exerciseDetailFormSchema>) => {
-    console.log(values);
+  // Create exercise
+  const { mutate, isLoading } = useMutation(
+    async (exerciseDetail: ExerciseDetailType) =>
+      await axios.post("/api/exercise/addExercise", exerciseDetail),
+    {
+      onError: (error) => {
+        toast.error("Something went wrong. Exercise hasn't been added", {
+          id: exerciseId,
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["exercises"]);
+        toast.success("Exercise has been added 🔥", { id: exerciseId });
+      },
+    },
+  );
+
+  const handleCreateExercise = (data: ExerciseDetailType) => {
+    toast.loading(`Adding ${data.name} exercise`, { id: exerciseId });
+    mutate(data);
+    reset();
   };
 
   return (
@@ -56,7 +77,10 @@ export default function AddExerciseForm() {
         <DialogTitle>Add exercise</DialogTitle>
       </DialogHeader>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={handleSubmit(handleCreateExercise)}
+          className="space-y-6"
+        >
           <div className="flex items-center gap-2">
             <FormField
               control={control}
@@ -104,7 +128,9 @@ export default function AddExerciseForm() {
             )}
           />
 
-          <Button className="w-full">Add exercise</Button>
+          <Button className="w-full" disabled={isLoading}>
+            Add exercise
+          </Button>
         </form>
       </Form>
     </DialogContent>
