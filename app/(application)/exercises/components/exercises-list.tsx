@@ -56,6 +56,7 @@ export default function ExercisesList() {
           <ul className="flex h-full flex-col gap-3 overflow-y-auto p-6">
             {data.map(({ id, name, avatarFallback }) => (
               <ExercisesListItem
+                id={id}
                 name={name}
                 avatarFallback={avatarFallback}
                 key={id}
