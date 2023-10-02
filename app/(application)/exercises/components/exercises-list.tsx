@@ -11,7 +11,7 @@ import ExercisesListItem from "./exercises-list-item";
 import ExercisesListItemSkeleton from "./exercises-list-item-skeleton";
 
 const fetchExercises = async () => {
-  const response = await axios.get("/api/exercise/getExercisesa");
+  const response = await axios.get("/api/exercise/getExercises");
   return response.data;
 };
 
