@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/client";
-import { ExerciseDetailType } from "@/types";
+
+import { ExerciseDetailType } from "@/app/(application)/exercises/components/exercise-form-template";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
