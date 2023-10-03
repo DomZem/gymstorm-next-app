@@ -1,30 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
+import { getSessionTime, getTotalKg } from "@/lib/utils";
+import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 import { format } from "date-fns";
 import { MdDelete } from "react-icons/md";
 
 interface TrainingsListItemProps {
-  id: string;
-  title: string;
-  date: string;
-  sessionTime: string;
-  totalKg: number;
+  training: TrainingPrismaType;
   index: number;
 }
 
 export default function TrainingsListItem({
   index,
-  title,
-  date,
-  totalKg,
+  training: { title, date, hourStart, hourEnd, exercises },
 }: TrainingsListItemProps) {
   return (
     <TableRow>
       <TableCell className="font-medium">{index}</TableCell>
       <TableCell>{title}</TableCell>
       <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
-      <TableCell>1h 30 minutes</TableCell>
-      <TableCell className="text-right">{totalKg}</TableCell>
+      <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
+      <TableCell className="text-right">{getTotalKg(exercises)}</TableCell>
       <TableCell className="flex items-center justify-end gap-2">
         <Button>Edit</Button>
 

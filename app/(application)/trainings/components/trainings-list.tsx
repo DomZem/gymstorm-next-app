@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -5,47 +7,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
+import axios from "axios";
+import { useQuery } from "react-query";
 import TrainingsListItem from "./trainings-list-item";
 
-const trainings = [
-  {
-    id: "1",
-    title: "Push",
-    date: new Date().toString(),
-    sessionTime: "12",
-    totalKg: 1200,
-  },
-  {
-    id: "2",
-    title: "Push",
-    date: new Date().toString(),
-    sessionTime: "12",
-    totalKg: 1200,
-  },
-  {
-    id: "3",
-    title: "Push",
-    date: new Date().toString(),
-    sessionTime: "12",
-    totalKg: 1200,
-  },
-  {
-    id: "4",
-    title: "Push",
-    date: new Date().toString(),
-    sessionTime: "12",
-    totalKg: 1200,
-  },
-  {
-    id: "5",
-    title: "Push",
-    date: new Date().toString(),
-    sessionTime: "12",
-    totalKg: 1200,
-  },
-];
+const fetchTrainings = async () => {
+  const response = await axios.get("/api/training/getTrainings");
+  return response.data;
+};
 
 export default function TrainingsList() {
+  const { data, isLoading, isError } = useQuery<TrainingPrismaType[]>({
+    queryFn: fetchTrainings,
+    queryKey: ["trainings"],
+  });
+
   return (
     <Table>
       <TableHeader>
@@ -59,17 +36,14 @@ export default function TrainingsList() {
         </TableRow>
       </TableHeader>
       <TableBody className="overflow-y-auto">
-        {trainings.map(({ id, title, date, sessionTime, totalKg }, index) => (
-          <TrainingsListItem
-            id={id}
-            title={title}
-            date={date}
-            sessionTime={sessionTime}
-            totalKg={totalKg}
-            key={id}
-            index={index + 1}
-          />
-        ))}
+        {!isLoading &&
+          data?.map((value, index) => (
+            <TrainingsListItem
+              training={value}
+              index={index + 1}
+              key={value.id}
+            />
+          ))}
       </TableBody>
     </Table>
   );
