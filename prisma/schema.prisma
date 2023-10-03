@@ -35,25 +35,60 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-
+  id              String           @id @default(cuid())
+  name            String?
+  email           String?          @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  trainings       Training[]
   exerciseDetails ExerciseDetail[]
 }
 
-model ExerciseDetail {
-  id             String  @id @default(cuid())
-  name           String
-  avatarUrl      String?
-  avatarFallback String
+model Training {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime   @db.Date
+  hourStart   String
+  hourEnd     String
+  exercises   Exercise[]
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+}
+
+model Exercise {
+  id     String  @id @default(cuid())
+  series Serie[]
+
+  exerciseDetail   ExerciseDetail @relation(fields: [exerciseDetailId], references: [id])
+  exerciseDetailId String
+
+  training   Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+  trainingId String
+}
+
+model ExerciseDetail {
+  id             String     @id @default(cuid())
+  name           String
+  avatarUrl      String?
+  avatarFallback String
+  exercises      Exercise[]
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model Serie {
+  id        String @id @default(cuid())
+  reps      Int
+  weight    Float?
+  breakTime String
+
+  exercise   Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  exerciseId String
 }
 
 model VerificationToken {
