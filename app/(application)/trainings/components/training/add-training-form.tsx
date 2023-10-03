@@ -24,6 +24,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
 import ExerciseFieldArray from "./exercise-field-array";
 import { TrainingType, trainingFormSchema } from "./formSchema";
 
@@ -48,20 +51,40 @@ const defaultValues = {
 };
 
 export default function AddTrainingForm() {
+  const queryClient = useQueryClient();
   const form = useForm<TrainingType>({
     resolver: zodResolver(trainingFormSchema),
     defaultValues,
   });
+  let toastId: string = "training";
 
-  const { control, handleSubmit, register, setValue, getValues } = form;
+  const { control, handleSubmit, register, setValue, getValues, reset } = form;
 
-  const onSubmit = (values: TrainingType) => {
-    console.log(values);
+  const { mutate, isLoading } = useMutation(
+    async (training: TrainingType) =>
+      await axios.post("/api/training/addTraining", training),
+    {
+      onError: (error) => {
+        toast.error("Something went wrong. Training hasn't been added", {
+          id: toastId,
+        });
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["trainings"]);
+        toast.success("Training has been added 🔥", { id: toastId });
+      },
+    },
+  );
+
+  const onAddTraining = (data: TrainingType) => {
+    toast.loading(`Adding ${data.title} training`, { id: toastId });
+    mutate(data);
+    reset();
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onAddTraining)} className="space-y-6">
         <FormField
           control={control}
           name="title"
@@ -174,7 +197,12 @@ export default function AddTrainingForm() {
           }}
         />
 
-        <Button variant="outline" className="w-full" type="submit">
+        <Button
+          variant="outline"
+          className="w-full"
+          type="submit"
+          disabled={isLoading}
+        >
           Add training
         </Button>
       </form>
