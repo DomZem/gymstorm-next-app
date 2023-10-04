@@ -97,4 +97,49 @@
   .nav-button {
     @apply flex w-full items-center gap-2 rounded-md px-4 py-2 text-sm font-medium duration-200 hover:bg-foreground hover:text-primary-foreground;
   }
+
+  .dot-windmill {
+    position: relative;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    transform-origin: 5px 15px;
+    animation: dot-windmill 2s infinite linear;
+    @apply bg-primary text-primary;
+  }
+
+  .dot-windmill::before,
+  .dot-windmill::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+  }
+
+  .dot-windmill::before {
+    left: -8.66254px;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    @apply bg-primary text-primary;
+  }
+
+  .dot-windmill::after {
+    left: 8.66254px;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    @apply bg-primary text-primary;
+  }
+
+  @keyframes dot-windmill {
+    0% {
+      transform: rotateZ(0deg) translate3d(0, 0, 0);
+    }
+    100% {
+      transform: rotateZ(720deg) translate3d(0, 0, 0);
+    }
+  }
 }
