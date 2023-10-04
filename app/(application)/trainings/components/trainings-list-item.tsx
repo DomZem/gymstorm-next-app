@@ -10,14 +10,17 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { DialogTrigger } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { getSessionTime, getTotalKg } from "@/lib/utils";
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
+import { Dialog } from "@radix-ui/react-dialog";
 import axios from "axios";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { useMutation, useQueryClient } from "react-query";
+import EditTrainingForm from "./training/edit-training-form";
 
 interface TrainingsListItemProps {
   training: TrainingPrismaType;
@@ -26,7 +29,7 @@ interface TrainingsListItemProps {
 
 export default function TrainingsListItem({
   index,
-  training: { id, title, date, hourStart, hourEnd, exercises },
+  training: { id, title, description, date, hourStart, hourEnd, exercises },
 }: TrainingsListItemProps) {
   const queryClient = useQueryClient();
 
@@ -48,46 +51,63 @@ export default function TrainingsListItem({
   );
 
   return (
-    <AlertDialog>
-      <TableRow>
-        <TableCell className="font-medium">{index}</TableCell>
-        <TableCell>{title}</TableCell>
-        <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
-        <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
-        <TableCell className="text-right">{getTotalKg(exercises)}</TableCell>
-        <TableCell className="flex items-center justify-end gap-2">
-          <Button>Edit</Button>
+    <Dialog>
+      <AlertDialog>
+        <TableRow>
+          <TableCell className="font-medium">{index}</TableCell>
+          <TableCell>{title}</TableCell>
+          <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
+          <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
+          <TableCell className="text-right">{getTotalKg(exercises)}</TableCell>
+          <TableCell className="flex items-center justify-end gap-2">
+            <DialogTrigger asChild>
+              <Button>Edit</Button>
+            </DialogTrigger>
 
-          <AlertDialogTrigger asChild>
-            <Button variant="destructive" size="icon">
-              <MdDelete className="h-4 w-4" />
-            </Button>
-          </AlertDialogTrigger>
-        </TableCell>
-      </TableRow>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your{" "}
-            <span className="text-primary">`{title}` </span>
-            training and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => {
-              toast.loading(`Deleting ${title} training`, {
-                id,
-              });
-              mutate(id);
-            }}
-          >
-            Delete
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive" size="icon">
+                <MdDelete className="h-4 w-4" />
+              </Button>
+            </AlertDialogTrigger>
+          </TableCell>
+        </TableRow>
+
+        <EditTrainingForm
+          trainingId={id}
+          defaultValues={{
+            title,
+            description,
+            date: new Date(date),
+            hourStart,
+            hourEnd,
+            exercises,
+          }}
+        />
+
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your{" "}
+              <span className="text-primary">`{title}` </span>
+              training and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                toast.loading(`Deleting ${title} training`, {
+                  id,
+                });
+                mutate(id);
+              }}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </Dialog>
   );
 }

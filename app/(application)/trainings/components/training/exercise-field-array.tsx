@@ -50,7 +50,10 @@ export default function ExerciseFieldArray({ control, register }) {
                 name={`exercises[${index}].exerciseDetailId`}
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <Select onValueChange={field.onChange}>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select exercise" />
