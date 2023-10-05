@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -10,6 +11,9 @@ import {
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 import axios from "axios";
 import { useQuery } from "react-query";
+import EmptyTrainings from "../../components/empty-trainings";
+import ErrorTrainings from "../../components/error-trainings";
+import LoadingTrainings from "../../components/loading-trainings";
 import TrainingsListItem from "./trainings-list-item";
 
 const fetchTrainings = async () => {
@@ -23,28 +27,41 @@ export default function TrainingsList() {
     queryKey: ["trainings"],
   });
 
+  if (isLoading) {
+    return <LoadingTrainings />;
+  }
+
+  if (isError) {
+    return <ErrorTrainings />;
+  }
+
+  if (!data?.length) {
+    return <EmptyTrainings />;
+  }
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Id</TableHead>
-          <TableHead>Title</TableHead>
-          <TableHead>Date</TableHead>
-          <TableHead>Session time (minutes)</TableHead>
-          <TableHead className="text-right">Total kg</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody className="overflow-y-auto">
-        {!isLoading &&
-          data?.map((value, index) => (
+    <Card className="flex flex-1 overflow-hidden">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Id</TableHead>
+            <TableHead>Title</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead>Session time (minutes)</TableHead>
+            <TableHead className="text-right">Total kg</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="overflow-y-auto">
+          {data.map((value, index) => (
             <TrainingsListItem
               training={value}
               index={index + 1}
               key={value.id}
             />
           ))}
-      </TableBody>
-    </Table>
+        </TableBody>
+      </Table>
+    </Card>
   );
 }

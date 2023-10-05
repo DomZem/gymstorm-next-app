@@ -36,7 +36,7 @@ export default async function handler(
         data: {
           title,
           description,
-          date: date || new Date(),
+          date,
           hourStart,
           hourEnd,
           exercises: {

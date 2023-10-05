@@ -15,9 +15,8 @@ export default function TrainingsPage() {
             </div>
           </CardHeader>
         </Card>
-        <Card className="flex flex-1 overflow-hidden">
-          <TrainingsList />
-        </Card>
+
+        <TrainingsList />
       </section>
       <section className="hidden overflow-hidden 2xl:flex">
         <Card className="flex h-full flex-1 flex-col overflow-hidden 2xl:col-start-3 2xl:col-end-4">

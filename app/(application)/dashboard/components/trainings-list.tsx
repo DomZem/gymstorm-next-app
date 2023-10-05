@@ -11,10 +11,13 @@ import {
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 import axios from "axios";
 import { useQuery } from "react-query";
+import EmptyTrainings from "../../components/empty-trainings";
+import ErrorTrainings from "../../components/error-trainings";
+import LoadingTrainings from "../../components/loading-trainings";
 import TrainingsListItem from "./trainings-list-item";
 
 const fetchTrainings = async () => {
-  const response = await axios.get("/api/training/getTrainings");
+  const response = await axios.get("/api/training/getTrainingas");
   return response.data;
 };
 
@@ -24,10 +27,20 @@ export default function TrainingsList() {
     queryKey: ["trainings"],
   });
 
-  if (isLoading) return <h1>Trainings are loading ...</h1>;
+  if (isLoading) {
+    return <LoadingTrainings />;
+  }
+
+  if (isError) {
+    return <ErrorTrainings />;
+  }
+
+  if (!data?.length) {
+    return <EmptyTrainings />;
+  }
 
   return (
-    <Card className="hidden flex-1 overflow-y-auto xl:block">
+    <Card className="flex-1 overflow-y-auto">
       <Table>
         <TableHeader>
           <TableRow>
@@ -40,14 +53,13 @@ export default function TrainingsList() {
           </TableRow>
         </TableHeader>
         <TableBody className="overflow-y-auto">
-          {!isLoading &&
-            data?.map((value, index) => (
-              <TrainingsListItem
-                training={value}
-                index={index + 1}
-                key={value.id}
-              />
-            ))}
+          {data.map((value, index) => (
+            <TrainingsListItem
+              training={value}
+              index={index + 1}
+              key={value.id}
+            />
+          ))}
         </TableBody>
       </Table>
     </Card>

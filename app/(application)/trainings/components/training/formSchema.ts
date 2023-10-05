@@ -20,10 +20,10 @@ export const trainingFormSchema = z.object({
     message: "Title must be at least 2 characters.",
   }),
   description: z.string().optional(),
-  date: z.date().optional(),
+  date: z.date(),
   hourStart: z.string(),
   hourEnd: z.string(),
-  exercises: z.array(exerciseFormSchema), // Optional exercises
+  exercises: z.array(exerciseFormSchema),
 });
 
 export type TrainingType = z.infer<typeof trainingFormSchema>;
