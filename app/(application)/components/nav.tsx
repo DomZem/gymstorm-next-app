@@ -12,12 +12,12 @@ export default function Nav() {
           <RxDashboard className="text-base" />
           Dashboard
         </AppLink>
+        <AppLink href={"/exercises"}>
+          <MdSportsGymnastics className="text-base" /> Exercises
+        </AppLink>
         <AppLink href={"/trainings"}>
           <IoIosFitness className="text-base" />
           Trainings
-        </AppLink>
-        <AppLink href={"/exercises"}>
-          <MdSportsGymnastics className="text-base" /> Exercises
         </AppLink>
       </nav>
       <AppSignOutButton />
