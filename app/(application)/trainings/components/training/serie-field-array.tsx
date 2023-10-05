@@ -8,6 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
 import { Control, FieldValues, useFieldArray } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
 
@@ -24,6 +25,18 @@ export default function SerieFieldArray({
     control,
     name: `exercises[${nestIndex}].series`,
   });
+
+  const [previousReps, setPreviousReps] = useState<number | null>(null);
+  const [previousWeight, setPreviousWeight] = useState<number | null>(null);
+  const [previousBreakTime, setPreviousBreakTime] = useState<string>("");
+
+  useEffect(() => {
+    const { reps, weight, breakTime } = fields[fields.length - 1];
+
+    setPreviousReps(reps);
+    setPreviousWeight(weight);
+    setPreviousBreakTime(breakTime);
+  }, [fields, remove]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -44,6 +57,11 @@ export default function SerieFieldArray({
                         value={parseInt(field.value, 10) || ""}
                         onChange={(e) => {
                           field.onChange(parseInt(e.target.value, 10) || "");
+                          if (fields.length - 1 === k) {
+                            setPreviousReps(
+                              parseInt(e.target.value, 10) || null,
+                            );
+                          }
                         }}
                       />
                     </FormControl>
@@ -64,6 +82,11 @@ export default function SerieFieldArray({
                         value={parseInt(field.value, 10) || ""}
                         onChange={(e) => {
                           field.onChange(parseInt(e.target.value, 10) || "");
+                          if (fields.length - 1 === k) {
+                            setPreviousWeight(
+                              parseInt(e.target.value, 10) || null,
+                            );
+                          }
                         }}
                       />
                     </FormControl>
@@ -77,7 +100,17 @@ export default function SerieFieldArray({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Break time" {...field} />
+                      <Input
+                        {...field}
+                        placeholder="Break time"
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                          if (fields.length - 1 === k) {
+                            setPreviousBreakTime(e.target.value);
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -87,7 +120,10 @@ export default function SerieFieldArray({
               <Button
                 variant="destructive"
                 className="px-3"
-                onClick={() => remove(k)}
+                onClick={() => {
+                  remove(k);
+                }}
+                disabled={fields.length === 1}
               >
                 <MdDelete className="h-4 w-4" />
               </Button>
@@ -100,15 +136,37 @@ export default function SerieFieldArray({
         <Button
           className="flex-1"
           type="button"
-          onClick={() =>
+          onClick={() => {
             append({
-              reps: "",
-              weight: "",
+              reps: 0,
+              weight: 0,
               breakTime: "",
-            })
-          }
+            });
+            setPreviousReps(null);
+            setPreviousWeight(null);
+            setPreviousBreakTime("");
+          }}
         >
           Add set
+        </Button>
+        <Button
+          className="flex-1"
+          variant="outline"
+          type="button"
+          onClick={() => {
+            append({
+              reps: previousReps,
+              weight: previousWeight,
+              breakTime: previousBreakTime,
+            });
+          }}
+          disabled={
+            previousReps === null ||
+            previousWeight === null ||
+            previousBreakTime === ""
+          }
+        >
+          Add previous set
         </Button>
       </div>
     </div>

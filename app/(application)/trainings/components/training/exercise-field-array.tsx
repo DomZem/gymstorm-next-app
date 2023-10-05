@@ -90,7 +90,7 @@ export default function ExerciseFieldArray({ control, register }) {
 
       <Button
         type="button"
-        variant="secondary"
+        variant="outline"
         onClick={() => {
           append({
             exerciseDetailId: "",

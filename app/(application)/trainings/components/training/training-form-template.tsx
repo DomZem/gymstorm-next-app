@@ -163,7 +163,6 @@ export default function TrainingFormTemplte({
         />
 
         <Button
-          variant="outline"
           className="w-full"
           type="submit"
           disabled={isSubmitButtonDisabled}
