@@ -93,10 +93,11 @@ export default function ExerciseFieldArray({ control, register }) {
         variant="secondary"
         onClick={() => {
           append({
-            serie: [
+            exerciseDetailId: "",
+            series: [
               {
-                reps: "",
-                weight: "",
+                reps: 0,
+                weight: 0,
                 breakTime: "",
               },
             ],

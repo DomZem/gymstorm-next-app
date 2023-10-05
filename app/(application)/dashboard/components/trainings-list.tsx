@@ -17,7 +17,7 @@ import LoadingTrainings from "../../components/loading-trainings";
 import TrainingsListItem from "./trainings-list-item";
 
 const fetchTrainings = async () => {
-  const response = await axios.get("/api/training/getTrainingas");
+  const response = await axios.get("/api/training/getTrainings");
   return response.data;
 };
 
