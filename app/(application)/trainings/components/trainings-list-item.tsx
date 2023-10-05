@@ -34,7 +34,7 @@ export default function TrainingsListItem({
   const queryClient = useQueryClient();
 
   // Delete training
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     async (id: string) =>
       await axios.delete("/api/training/deleteTraining", { data: id }),
     {
@@ -65,7 +65,7 @@ export default function TrainingsListItem({
             </DialogTrigger>
 
             <AlertDialogTrigger asChild>
-              <Button variant="destructive" size="icon">
+              <Button variant="destructive" size="icon" disabled={isLoading}>
                 <MdDelete className="h-4 w-4" />
               </Button>
             </AlertDialogTrigger>
