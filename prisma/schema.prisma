@@ -63,7 +63,7 @@ model Exercise {
   id     String  @id @default(cuid())
   series Serie[]
 
-  exerciseDetail   ExerciseDetail @relation(fields: [exerciseDetailId], references: [id])
+  exerciseDetail   ExerciseDetail @relation(fields: [exerciseDetailId], references: [id], onDelete: Cascade)
   exerciseDetailId String
 
   training   Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
