@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 interface RecordsListItemProps {
   exerciseName: string;
-  recordDate: string;
+  recordDate: Date;
   currentHighScore: number;
   previousHighScore: number;
 }
@@ -15,10 +15,12 @@ export default function RecordsListItem({
   previousHighScore,
 }: RecordsListItemProps) {
   const progress =
-    ((currentHighScore - previousHighScore) / previousHighScore) * 100;
+    previousHighScore === 0
+      ? 100
+      : ((currentHighScore - previousHighScore) / previousHighScore) * 100;
 
   return (
-    <li className="flex-shrink-0 2xl:flex-1">
+    <li className="flex-shrink-0">
       <Card>
         <CardHeader>
           <CardTitle className="text-sm font-medium">{exerciseName}</CardTitle>
@@ -27,7 +29,7 @@ export default function RecordsListItem({
           <p className="text-xl font-bold">
             {currentHighScore} kg{" "}
             <span className="text-sm font-medium">
-              at {format(new Date(), "d LLLL Y")}
+              at {format(recordDate, "d LLLL Y")}
             </span>{" "}
           </p>
           <p className="text-xs text-muted-foreground">

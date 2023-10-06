@@ -3,11 +3,9 @@ import Spinner from "@/components/ui/spinner";
 
 export default function LoadingTrainings() {
   return (
-    <Card className="flex flex-1 overflow-hidden">
-      <CardHeader className="flex h-full w-full items-center justify-center gap-6 text-center">
-        <CardTitle className="text-xl font-semibold tracking-tight">
-          Loading trainings
-        </CardTitle>
+    <Card className="flex h-full items-center justify-center">
+      <CardHeader className="flex flex-row items-center gap-6">
+        <CardTitle>Download trainings</CardTitle>
         <Spinner />
       </CardHeader>
     </Card>
