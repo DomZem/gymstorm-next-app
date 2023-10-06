@@ -9,36 +9,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
-import axios from "axios";
-import { useQuery } from "react-query";
-import EmptyTrainings from "../../components/empty-trainings";
-import ErrorTrainings from "../../components/error-trainings";
-import LoadingTrainings from "../../components/loading-trainings";
 import TrainingsListItem from "./trainings-list-item";
 
-const fetchTrainings = async () => {
-  const response = await axios.get("/api/training/getTrainings");
-  return response.data;
-};
+interface TrainingsListProps {
+  trainings: TrainingPrismaType[];
+}
 
-export default function TrainingsList() {
-  const { data, isLoading, isError } = useQuery<TrainingPrismaType[]>({
-    queryFn: fetchTrainings,
-    queryKey: ["trainings"],
-  });
-
-  if (isLoading) {
-    return <LoadingTrainings />;
-  }
-
-  if (isError) {
-    return <ErrorTrainings />;
-  }
-
-  if (!data?.length) {
-    return <EmptyTrainings />;
-  }
-
+export default function TrainingsList({ trainings }: TrainingsListProps) {
   return (
     <Card className="flex-1 overflow-y-auto">
       <Table>
@@ -53,7 +30,7 @@ export default function TrainingsList() {
           </TableRow>
         </TableHeader>
         <TableBody className="overflow-y-auto">
-          {data.map((value, index) => (
+          {trainings.map((value, index) => (
             <TrainingsListItem
               training={value}
               index={index + 1}

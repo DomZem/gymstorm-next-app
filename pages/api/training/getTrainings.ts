@@ -28,9 +28,18 @@ export default async function handler(
         include: {
           exercises: {
             include: {
+              exerciseDetail: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
               series: true,
             },
           },
+        },
+        orderBy: {
+          date: "desc",
         },
       });
 
@@ -54,6 +63,10 @@ export type TrainingPrismaType = {
 export type ExercisePrismaType = {
   id: string;
   exerciseDetailId: string;
+  exerciseDetail: {
+    id: string;
+    name: string;
+  };
   series: SeriePrismaType[];
   trainingId: string;
 };

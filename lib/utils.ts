@@ -46,3 +46,27 @@ export const getTotalKg = (exercises: ExercisePrismaType[]): number => {
 
   return result;
 };
+
+export const timeStringToSeconds = (timeString: string): number => {
+  const [minutes, seconds] = timeString.split(":").map(Number);
+
+  if (isNaN(minutes) || isNaN(seconds)) {
+    throw new Error("Invalid time format");
+  }
+
+  return minutes * 60 + seconds;
+};
+
+export const secondsToTimeString = (totalSeconds: number): string => {
+  if (totalSeconds < 0) {
+    throw new Error("Total seconds cannot be negative");
+  }
+
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+};
