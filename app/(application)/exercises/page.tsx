@@ -7,7 +7,7 @@ import EmptyTrainings from "../components/empty-trainings";
 import ErrorTrainings from "../components/error-trainings";
 import LoadingTrainings from "../components/loading-trainings";
 import RecordsList from "../components/records-list";
-import ExerciseChartProgress from "./components/exercise-chart-progress";
+import ExerciseProgress from "./components/exercise-progress";
 import ExercisesList from "./components/exercises-list";
 
 const fetchTrainings = async () => {
@@ -31,7 +31,7 @@ export default function ExercisesPage() {
         ) : (
           <>
             <RecordsList trainings={data} />
-            <ExerciseChartProgress />
+            <ExerciseProgress trainings={data} />
           </>
         )}
       </section>
