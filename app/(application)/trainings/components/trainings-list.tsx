@@ -43,12 +43,12 @@ export default function TrainingsList() {
     <Card className="flex flex-1 overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="whitespace-nowrap">
             <TableHead className="w-[100px]">Id</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Date</TableHead>
-            <TableHead>Session time (minutes)</TableHead>
-            <TableHead className="text-right">Total kg</TableHead>
+            <TableHead>Session time</TableHead>
+            <TableHead className="text-right">Transferred weight</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>

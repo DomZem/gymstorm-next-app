@@ -53,12 +53,14 @@ export default function TrainingsListItem({
   return (
     <Dialog>
       <AlertDialog>
-        <TableRow>
+        <TableRow className="whitespace-nowrap">
           <TableCell className="font-medium">{index}</TableCell>
           <TableCell>{title}</TableCell>
           <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
           <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
-          <TableCell className="text-right">{getTotalKg(exercises)}</TableCell>
+          <TableCell className="text-right">
+            {getTotalKg(exercises)} kg
+          </TableCell>
           <TableCell className="flex items-center justify-end gap-2">
             <DialogTrigger asChild>
               <Button>Edit</Button>

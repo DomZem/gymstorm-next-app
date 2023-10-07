@@ -20,13 +20,13 @@ export default function TrainingsList({ trainings }: TrainingsListProps) {
     <Card className="flex-1 overflow-y-auto">
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow className="whitespace-nowrap">
             <TableHead className="w-[100px]">Id</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Date</TableHead>
-            <TableHead>Session time (minutes)</TableHead>
+            <TableHead>Session time</TableHead>
             <TableHead>Exercises</TableHead>
-            <TableHead className="text-right">Total kg</TableHead>
+            <TableHead className="text-right">Transferred weight</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="overflow-y-auto">

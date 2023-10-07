@@ -13,13 +13,13 @@ export default function TrainingsListItem({
   training: { title, date, hourStart, hourEnd, exercises },
 }: TrainingsListItemProps) {
   return (
-    <TableRow>
+    <TableRow className="whitespace-nowrap">
       <TableCell className="font-medium">{index}</TableCell>
       <TableCell>{title}</TableCell>
       <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
       <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
       <TableCell>{exercises.length}</TableCell>
-      <TableCell className="text-right">{getTotalKg(exercises)}</TableCell>
+      <TableCell className="text-right">{getTotalKg(exercises)} kg</TableCell>
     </TableRow>
   );
 }
