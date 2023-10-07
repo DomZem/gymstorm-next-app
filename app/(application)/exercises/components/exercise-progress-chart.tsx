@@ -1,6 +1,13 @@
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "next-themes";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { ChartData } from "./exercise-progress";
 
 interface ExerciseProgressChartProps {
@@ -52,8 +59,29 @@ export default function ExerciseProgressChart({
             className="stroke-slate-950"
             stroke={color}
           />
+          <Tooltip content={<CustomTooltip />} />
         </LineChart>
       </ResponsiveContainer>
     </CardContent>
   );
 }
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <Card>
+        <CardContent className="p-2 text-sm text-muted-foreground">
+          <p>
+            Date:{" "}
+            <span className="font-semibold text-primary">{`${label}`}</span>
+          </p>
+          <p>
+            Weight:{" "}
+            <span className="font-semibold text-primary">{`${payload[0].value}kg`}</span>{" "}
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+  return null;
+};
