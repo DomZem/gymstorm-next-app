@@ -1,6 +1,8 @@
 "use client";
 
+import EmptyExercises from "@/app/(application)/components/empty-exercises";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -10,20 +12,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
-import { useForm } from "react-hook-form";
-
-import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ExerciseDetail } from "@prisma/client";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import axios from "axios";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
 import ExerciseFieldArray from "./exercise-field-array";
 import { TrainingType, trainingFormSchema } from "./formSchema";
 
@@ -34,18 +36,32 @@ interface TrainingFormTemplteProps {
   isSubmitButtonDisabled: boolean;
 }
 
+const fetchExercises = async () => {
+  const response = await axios.get("/api/exercise/getExercises");
+  return response.data;
+};
+
 export default function TrainingFormTemplte({
   variant,
   defaultValues,
   onSubmit,
   isSubmitButtonDisabled,
 }: TrainingFormTemplteProps) {
+  const { data } = useQuery<ExerciseDetail[]>({
+    queryFn: fetchExercises,
+    queryKey: ["exercises"],
+  });
+
   const form = useForm<TrainingType>({
     resolver: zodResolver(trainingFormSchema),
     defaultValues,
   });
 
   const { control, handleSubmit, register, setValue, getValues } = form;
+
+  if (!data?.length) {
+    return <EmptyExercises />;
+  }
 
   return (
     <Form {...form}>
@@ -159,6 +175,7 @@ export default function TrainingFormTemplte({
             defaultValues,
             getValues,
             setValue,
+            exercisesDetail: data,
           }}
         />
 

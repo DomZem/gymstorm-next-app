@@ -14,23 +14,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ExerciseDetail } from "@prisma/client";
-import axios from "axios";
 import { useFieldArray } from "react-hook-form";
-import { useQuery } from "react-query";
 import SerieFieldArray from "./serie-field-array";
 
-const fetchExercises = async () => {
-  const response = await axios.get("/api/exercise/getExercises");
-  return response.data;
-};
-
-export default function ExerciseFieldArray({ control, register }) {
-  const { data } = useQuery<ExerciseDetail[]>({
-    queryFn: fetchExercises,
-    queryKey: ["exercises"],
-  });
-
+export default function ExerciseFieldArray({
+  control,
+  register,
+  exercisesDetail,
+}) {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "exercises",
@@ -60,7 +51,7 @@ export default function ExerciseFieldArray({ control, register }) {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {data?.map(({ id, name }) => (
+                        {exercisesDetail.map(({ id, name }) => (
                           <SelectItem value={id} key={id}>
                             {name}
                           </SelectItem>

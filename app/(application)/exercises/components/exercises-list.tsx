@@ -6,6 +6,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { ExerciseDetail } from "@prisma/client";
 import axios from "axios";
 import { useQuery } from "react-query";
+import EmptyExercises from "../../components/empty-exercises";
 import AddExerciseForm from "./add-exercise-form";
 import ExercisesListItem from "./exercises-list-item";
 import ExercisesListItemSkeleton from "./exercises-list-item-skeleton";
@@ -34,9 +35,9 @@ export default function ExercisesList() {
         </Dialog>
       </CardHeader>
 
-      <CardContent className="h-full overflow-hidden p-0">
+      <CardContent className="h-full overflow-hidden">
         {isLoading && (
-          <ul className="flex h-full flex-col gap-3 p-6">
+          <ul className="flex h-full flex-col gap-3 py-6">
             <ExercisesListItemSkeleton />
             <ExercisesListItemSkeleton />
             <ExercisesListItemSkeleton />
@@ -52,8 +53,10 @@ export default function ExercisesList() {
           </section>
         )}
 
-        {data && data.length > 0 && (
-          <ul className="flex h-full flex-col gap-3 overflow-y-auto p-6">
+        {!data?.length ? (
+          <EmptyExercises />
+        ) : (
+          <ul className="flex h-full flex-col gap-3 overflow-y-auto py-6">
             {data.map(({ id, name, avatarFallback }) => (
               <ExercisesListItem
                 id={id}
