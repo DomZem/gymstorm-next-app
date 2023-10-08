@@ -1,25 +1,16 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import emptyImage from "@/public/empty.svg";
-import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import { IoIosFitness } from "react-icons/io";
 
 export default function EmptyTrainings() {
   return (
     <Card className="flex h-full flex-1 items-center justify-center overflow-hidden">
-      <div className="flex flex-col items-center gap-3">
-        <CardHeader>
-          <CardTitle className="text-center">
-            You have no training. Create a first one!
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex items-center justify-center">
-          <Image
-            width={0}
-            height={0}
-            style={{ width: "60%", height: "auto" }}
-            src={emptyImage}
-            alt="sad face"
-          />
-        </CardContent>
+      <div className="flex flex-col items-center">
+        <IoIosFitness className="text-6xl" />
+        <h3 className="text-lg font-semibold">No trainings added</h3>
+        <p className="text-sm text-muted-foreground">
+          You have not added any trainings. Add at least one to display specific
+          data.
+        </p>
       </div>
     </Card>
   );

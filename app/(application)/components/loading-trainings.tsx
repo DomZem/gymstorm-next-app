@@ -1,13 +1,13 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import Spinner from "@/components/ui/spinner";
 
 export default function LoadingTrainings() {
   return (
-    <Card className="flex h-full items-center justify-center">
-      <CardHeader className="flex flex-row items-center gap-6">
-        <CardTitle>Download trainings</CardTitle>
+    <Card className="flex h-full flex-1 items-center justify-center overflow-hidden">
+      <div className="flex flex-col items-center gap-4">
         <Spinner />
-      </CardHeader>
+        <h3 className="text-lg font-semibold">Download trainings</h3>
+      </div>
     </Card>
   );
 }
