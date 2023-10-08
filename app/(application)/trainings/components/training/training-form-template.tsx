@@ -57,7 +57,15 @@ export default function TrainingFormTemplte({
     defaultValues,
   });
 
-  const { control, handleSubmit, register, setValue, getValues } = form;
+  const { control, handleSubmit, register, setValue, getValues, reset } = form;
+
+  const handleFormSubmit = (data: TrainingType) => {
+    onSubmit(data);
+
+    if (variant === "add") {
+      reset();
+    }
+  };
 
   if (!data?.length) {
     return <EmptyExercises />;
@@ -65,7 +73,7 @@ export default function TrainingFormTemplte({
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
         <FormField
           control={control}
           name="title"

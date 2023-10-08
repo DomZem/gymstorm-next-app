@@ -49,7 +49,15 @@ export default function ExerciseFormTemplate({
     defaultValues,
   });
 
-  const { control, handleSubmit } = form;
+  const { control, handleSubmit, reset } = form;
+
+  const handleFormSubmit = (data: ExerciseDetailType) => {
+    onSubmit(data);
+
+    if (variant === "add") {
+      reset();
+    }
+  };
 
   return (
     <DialogContent className="max-h-[90%] overflow-y-auto">
@@ -57,7 +65,7 @@ export default function ExerciseFormTemplate({
         <DialogTitle>{variant === "add" ? "Add" : "Edit"} exercise</DialogTitle>
       </DialogHeader>
       <Form {...form}>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
           <div className="flex items-center gap-2">
             <FormField
               control={control}
