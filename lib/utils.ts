@@ -70,3 +70,11 @@ export const secondsToTimeString = (totalSeconds: number): string => {
 
   return `${formattedMinutes}:${formattedSeconds}`;
 };
+
+export const formatToThousandsSeparator = (num: number): string => {
+  const numStr = num.toString();
+
+  const formattedNum = numStr.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+  return formattedNum;
+};

@@ -1,5 +1,9 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { getSessionTime, getTotalKg } from "@/lib/utils";
+import {
+  formatToThousandsSeparator,
+  getSessionTime,
+  getTotalKg,
+} from "@/lib/utils";
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 import { format } from "date-fns";
 
@@ -19,7 +23,9 @@ export default function TrainingsListItem({
       <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
       <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
       <TableCell>{exercises.length}</TableCell>
-      <TableCell className="text-right">{getTotalKg(exercises)} kg</TableCell>
+      <TableCell className="text-right">
+        {formatToThousandsSeparator(getTotalKg(exercises))} kg
+      </TableCell>
     </TableRow>
   );
 }

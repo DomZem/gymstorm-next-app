@@ -12,7 +12,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { getSessionTime, getTotalKg } from "@/lib/utils";
+import {
+  formatToThousandsSeparator,
+  getSessionTime,
+  getTotalKg,
+} from "@/lib/utils";
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 import { Dialog } from "@radix-ui/react-dialog";
 import axios from "axios";
@@ -59,7 +63,7 @@ export default function TrainingsListItem({
           <TableCell>{format(new Date(date), "d LLLL Y")}</TableCell>
           <TableCell>{getSessionTime(hourStart, hourEnd)}</TableCell>
           <TableCell className="text-right">
-            {getTotalKg(exercises)} kg
+            {formatToThousandsSeparator(getTotalKg(exercises))} kg
           </TableCell>
           <TableCell className="flex items-center justify-end gap-2">
             <DialogTrigger asChild>

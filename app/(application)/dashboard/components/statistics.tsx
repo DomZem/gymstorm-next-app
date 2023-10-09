@@ -1,5 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { secondsToTimeString, timeStringToSeconds } from "@/lib/utils";
+import {
+  formatToThousandsSeparator,
+  secondsToTimeString,
+  timeStringToSeconds,
+} from "@/lib/utils";
 import { TrainingPrismaType } from "@/pages/api/training/getTrainings";
 
 const getStats = (trainings: TrainingPrismaType[]) => {
@@ -80,7 +84,10 @@ export default function Statistics({ trainings }: StatisticsProps) {
             </li>
             <li>
               Transferred weight:{" "}
-              <span className="font-medium">{transferredWeight} kg</span>
+              <span className="font-medium">
+                {" "}
+                {formatToThousandsSeparator(transferredWeight)} kg
+              </span>
             </li>
             <li>
               Favourite exercise:{" "}
