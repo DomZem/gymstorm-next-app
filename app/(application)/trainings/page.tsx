@@ -14,7 +14,7 @@ import TrainingsList from "./components/trainings-list";
 export default function TrainingsPage() {
   return (
     <div className="grid h-full overflow-hidden xl:gap-6 2xl:grid-cols-3 2xl:grid-rows-[1fr]">
-      <section className="flex flex-col gap-6 overflow-hidden 2xl:col-start-1 2xl:col-end-3">
+      <section className="flex flex-col gap-3 overflow-hidden 2xl:col-start-1 2xl:col-end-3">
         <Dialog>
           <Card className="2xl:hidden">
             <CardHeader>

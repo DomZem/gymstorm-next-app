@@ -37,7 +37,7 @@ export default function DashboardPage() {
     <div className="grid h-full grid-rows-[auto_1fr] gap-3 overflow-hidden md:gap-6 xl:grid-cols-4 xl:grid-rows-[1fr]">
       <section className="flex flex-col overflow-hidden md:gap-6 xl:col-start-1 xl:col-end-4">
         <RecordsList trainings={data} />
-        <div className="hidden flex-1 xl:flex">
+        <div className="hidden flex-1 overflow-y-auto xl:flex">
           <TrainingsList trainings={data} />
         </div>
       </section>

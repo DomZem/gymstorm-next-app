@@ -20,8 +20,7 @@ export default async function handler(
       title,
       description,
       date,
-      hourStart,
-      hourEnd,
+      hours: { hourStart, hourEnd },
       exercises,
     }: TrainingType = req.body;
 

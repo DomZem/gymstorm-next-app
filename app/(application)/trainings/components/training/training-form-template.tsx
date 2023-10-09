@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import Spinner from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -47,7 +48,7 @@ export default function TrainingFormTemplte({
   onSubmit,
   isSubmitButtonDisabled,
 }: TrainingFormTemplteProps) {
-  const { data } = useQuery<ExerciseDetail[]>({
+  const { data, isLoading } = useQuery<ExerciseDetail[]>({
     queryFn: fetchExercises,
     queryKey: ["exercises"],
   });
@@ -66,6 +67,17 @@ export default function TrainingFormTemplte({
       reset();
     }
   };
+
+  if (isLoading) {
+    return (
+      <section className="flex h-full items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Spinner />
+          <h3 className="text-lg font-semibold">Download exercises</h3>
+        </div>
+      </section>
+    );
+  }
 
   if (!data?.length) {
     return <EmptyExercises />;
@@ -97,7 +109,7 @@ export default function TrainingFormTemplte({
               <FormControl>
                 <Textarea
                   className="resize-none"
-                  placeholder="It was very good trainig."
+                  placeholder="It was very good training."
                   {...field}
                 />
               </FormControl>
@@ -149,7 +161,7 @@ export default function TrainingFormTemplte({
         <div className="flex items-center gap-2">
           <FormField
             control={control}
-            name="hourStart"
+            name="hours.hourStart"
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Start</FormLabel>
@@ -163,7 +175,7 @@ export default function TrainingFormTemplte({
 
           <FormField
             control={control}
-            name="hourEnd"
+            name="hours.hourEnd"
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>End</FormLabel>

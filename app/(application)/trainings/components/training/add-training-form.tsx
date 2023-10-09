@@ -6,12 +6,14 @@ import { useMutation, useQueryClient } from "react-query";
 import { TrainingType } from "./formSchema";
 import TrainingFormTemplte from "./training-form-template";
 
-const defaultValues = {
+const defaultValues: TrainingType = {
   title: "",
   description: "",
   date: new Date(),
-  hourStart: "",
-  hourEnd: "",
+  hours: {
+    hourStart: "",
+    hourEnd: "",
+  },
   exercises: [
     {
       exerciseDetailId: "",

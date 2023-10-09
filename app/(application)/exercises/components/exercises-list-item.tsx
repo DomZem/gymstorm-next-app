@@ -41,7 +41,7 @@ export default function ExercisesListItem({
   };
 
   // Delete exercise
-  const deleteExerciseMutation = useMutation(
+  const { mutate, isLoading } = useMutation(
     async (id: string) =>
       await axios.delete("/api/exercise/deleteExercise", { data: id }),
     {
@@ -74,7 +74,7 @@ export default function ExercisesListItem({
             </DialogTrigger>
 
             <AlertDialogTrigger asChild>
-              <Button variant="destructive" size="icon">
+              <Button variant="destructive" size="icon" disabled={isLoading}>
                 <MdDelete className="h-4 w-4" />
               </Button>
             </AlertDialogTrigger>
@@ -97,7 +97,7 @@ export default function ExercisesListItem({
                 toast.loading(`Deleting ${name} exercise`, {
                   id,
                 });
-                deleteExerciseMutation.mutate(id);
+                mutate(id);
               }}
             >
               Delete

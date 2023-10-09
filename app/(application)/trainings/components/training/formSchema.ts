@@ -2,7 +2,7 @@ import * as z from "zod";
 
 export const serieFormSchema = z.object({
   reps: z.number().positive(),
-  weight: z.number().positive().optional(),
+  weight: z.number(),
   breakTime: z.string().refine((value) => /^([0-9]+:[0-9]+)$/.test(value), {
     message: "Break time must be in the format 'mm:ss'",
   }),
@@ -21,8 +21,10 @@ export const trainingFormSchema = z.object({
   }),
   description: z.string().optional(),
   date: z.date(),
-  hourStart: z.string(),
-  hourEnd: z.string(),
+  hours: z.object({
+    hourStart: z.string(),
+    hourEnd: z.string(),
+  }),
   exercises: z.array(exerciseFormSchema),
 });
 

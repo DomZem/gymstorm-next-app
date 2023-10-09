@@ -26,9 +26,9 @@ export default function ExercisesPage() {
       <section className="flex flex-col gap-6 overflow-hidden xl:col-start-1 xl:col-end-4">
         {isLoading && <LoadingTrainings />}
         {isError && <ErrorTrainings />}
-        {!data?.length ? (
-          <EmptyTrainings />
-        ) : (
+        {!data?.length && !isLoading && <EmptyTrainings />}
+
+        {data !== undefined && data.length > 0 && (
           <>
             <RecordsList trainings={data} />
             <ExerciseProgress trainings={data} />

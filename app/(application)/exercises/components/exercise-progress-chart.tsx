@@ -20,6 +20,18 @@ export default function ExerciseProgressChart({
   const { theme } = useTheme();
   const color = `${theme === "dark" ? "#fff" : "#0f172a"}`;
 
+  if (data === null) {
+    return (
+      <CardContent className="flex h-full flex-col items-center justify-center gap-3 p-4">
+        <h4 className="text-xl font-semibold tracking-tight">Select options</h4>
+        <p className="text-sm text-muted-foreground">
+          To display chart select the measure option and then exercise, after
+          that hit the button to ger your chart!
+        </p>
+      </CardContent>
+    );
+  }
+
   if (!data?.length) {
     return (
       <CardContent className="flex h-full flex-col items-center justify-center gap-3 p-4">

@@ -79,12 +79,12 @@ export default function SerieFieldArray({
                         {...field}
                         type="number"
                         placeholder="Weight (kg)"
-                        value={parseInt(field.value, 10) || ""}
+                        value={parseFloat(field.value) || ""}
                         onChange={(e) => {
-                          field.onChange(parseInt(e.target.value, 10) || "");
+                          field.onChange(parseFloat(e.target.value) || "");
                           if (fields.length - 1 === k) {
                             setPreviousWeight(
-                              parseInt(e.target.value, 10) || null,
+                              parseFloat(e.target.value) || null,
                             );
                           }
                         }}
@@ -132,7 +132,7 @@ export default function SerieFieldArray({
         );
       })}
 
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 md:flex-row">
         <Button
           className="flex-1"
           type="button"

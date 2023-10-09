@@ -14,6 +14,7 @@ import { ExerciseDetail } from "@prisma/client";
 import axios from "axios";
 import { format } from "date-fns";
 import { useState } from "react";
+import { MdSportsGymnastics } from "react-icons/md";
 import { useQuery } from "react-query";
 import ExerciseProgressChart from "./exercise-progress-chart";
 
@@ -124,7 +125,7 @@ export default function ExerciseProgress({ trainings }: ExerciseProgressProps) {
     "",
   );
   const [exerciseDetailName, setExerciseDetailName] = useState("");
-  const [chartData, setChartData] = useState<ChartData[]>();
+  const [chartData, setChartData] = useState<ChartData[] | null>(null);
 
   const { data } = useQuery<ExerciseDetail[]>({
     queryFn: fetchExercises,
@@ -133,8 +134,15 @@ export default function ExerciseProgress({ trainings }: ExerciseProgressProps) {
 
   if (!data?.length) {
     return (
-      <Card>
-        <p>Impossible to get stats!</p>
+      <Card className="flex h-full flex-1 items-center justify-center overflow-hidden">
+        <div className="flex flex-col items-center">
+          <MdSportsGymnastics className="text-6xl" />
+          <h3 className="text-lg font-semibold">No exercises added</h3>
+          <p className="text-sm text-muted-foreground">
+            You have not added any exercises. Add at least one to be able to
+            create training.
+          </p>
+        </div>
       </Card>
     );
   }
@@ -189,7 +197,12 @@ export default function ExerciseProgress({ trainings }: ExerciseProgressProps) {
               ))}
             </SelectContent>
           </Select>
-          <Button onClick={handleGetStats}>Get stats</Button>
+          <Button
+            disabled={measureOption === "" || exerciseDetailName === ""}
+            onClick={handleGetStats}
+          >
+            Get stats
+          </Button>
         </div>
       </CardHeader>
 

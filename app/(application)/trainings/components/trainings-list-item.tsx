@@ -80,8 +80,10 @@ export default function TrainingsListItem({
             title,
             description,
             date: new Date(date),
-            hourStart,
-            hourEnd,
+            hours: {
+              hourStart,
+              hourEnd,
+            },
             exercises,
           }}
         />

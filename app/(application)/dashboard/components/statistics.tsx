@@ -55,7 +55,14 @@ interface StatisticsProps {
 }
 
 export default function Statistics({ trainings }: StatisticsProps) {
-  const stats = getStats(trainings);
+  const {
+    totalTrainings,
+    transferredWeight,
+    favouriteExercise,
+    seriesPerExercise,
+    repsPerSerie,
+    breakTimePerSerie,
+  } = getStats(trainings);
 
   return (
     <Card className="h-full overflow-hidden">
@@ -69,15 +76,15 @@ export default function Statistics({ trainings }: StatisticsProps) {
           <ul className="ml-6 list-disc text-sm [&>li]:mt-2">
             <li>
               Total trainings:{" "}
-              <span className="font-medium">{stats.totalTrainings}</span>
+              <span className="font-medium">{totalTrainings}</span>
             </li>
             <li>
               Transferred weight:{" "}
-              <span className="font-medium">{stats.transferredWeight} kg</span>
+              <span className="font-medium">{transferredWeight} kg</span>
             </li>
             <li>
               Favourite exercise:{" "}
-              <span className="font-medium">{stats.favouriteExercise}</span>
+              <span className="font-medium">{favouriteExercise}</span>
             </li>
           </ul>
         </section>
@@ -87,15 +94,15 @@ export default function Statistics({ trainings }: StatisticsProps) {
           <ul className="ml-6 list-disc text-sm [&>li]:mt-2">
             <li>
               Series per exercise:{" "}
-              <span className="font-medium">{stats.seriesPerExercise}</span>
+              <span className="font-medium">{seriesPerExercise}</span>
             </li>
             <li>
               Reps per serie:{" "}
-              <span className="font-medium">{stats.repsPerSerie}</span>
+              <span className="font-medium">{repsPerSerie}</span>
             </li>
             <li>
               Break time per serie:{" "}
-              <span className="font-medium">{stats.breakTimePerSerie}</span>
+              <span className="font-medium">{breakTimePerSerie}</span>
             </li>
           </ul>
         </section>

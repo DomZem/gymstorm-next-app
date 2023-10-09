@@ -40,7 +40,7 @@ const getRecords = (trainings: TrainingPrismaType[]) => {
   oneRepMaxArr.forEach((exercise) => {
     const existingRecord = exerciseRecordsMap.get(exercise.exerciseName);
     if (existingRecord) {
-      if (existingRecord.currentHighScore < exercise.weight) {
+      if (existingRecord.recordDate < exercise.date) {
         existingRecord.previousHighScore = existingRecord.currentHighScore;
         existingRecord.currentHighScore = exercise.weight;
       }
@@ -72,7 +72,7 @@ export default function RecordsList({ trainings }: RecordsListProps) {
   if (records.length === 0) {
     return (
       <Card className="flex h-[138px] items-center justify-center">
-        <CardContent className="flex h-full flex-col items-center justify-center gap-3 p-4">
+        <CardContent className="flex h-full flex-col items-center justify-center gap-3 p-4 text-center">
           <h4 className="text-xl font-semibold tracking-tight">No records</h4>
           <p className="text-sm text-muted-foreground">
             Create a training with one rep to view your current records.

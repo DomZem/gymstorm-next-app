@@ -19,6 +19,8 @@ export default function RecordsListItem({
       ? 100
       : ((currentHighScore - previousHighScore) / previousHighScore) * 100;
 
+  const isProgress = progress > 0;
+
   return (
     <li className="flex-shrink-0">
       <Card>
@@ -33,8 +35,13 @@ export default function RecordsListItem({
             </span>{" "}
           </p>
           <p className="text-xs text-muted-foreground">
-            <span className="font-medium text-green-600">
-              +{parseFloat(progress.toFixed(2))}%
+            <span
+              className={`font-medium  ${
+                isProgress ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {isProgress && "+"}
+              {parseFloat(progress.toFixed(2))}%
             </span>{" "}
             from last attempt
           </p>
