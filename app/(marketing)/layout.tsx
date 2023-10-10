@@ -13,8 +13,8 @@ export default function RootLayout({
 }) {
   return (
     <div className="w-full">
-      <header className="fixed top-0 flex h-16 w-full items-center justify-center border-b-[1px]">
-        <div className="flex max-w-7xl flex-1 items-center justify-between px-3">
+      <header className="fixed top-0 flex h-16 w-full items-center justify-center border-b-[1px] bg-primary-foreground">
+        <div className="flex max-w-5xl flex-1 items-center justify-between px-3">
           <div className="flex items-center gap-2">
             <Image src={logo} width={32} height={32} alt="gymstorm logo" />
             <h1 className="text-xl font-semibold lg:text-2xl">Gymstorm</h1>
@@ -36,7 +36,7 @@ export default function RootLayout({
           </div>
         </div>
       </header>
-      <div className="mt-16">{children}</div>
+      <main>{children}</main>
     </div>
   );
 }
