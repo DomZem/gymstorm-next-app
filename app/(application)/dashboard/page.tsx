@@ -34,14 +34,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="grid h-full grid-rows-[auto_1fr] gap-3 overflow-hidden md:gap-6 xl:grid-cols-4 xl:grid-rows-[1fr]">
-      <section className="flex flex-col overflow-hidden md:gap-6 xl:col-start-1 xl:col-end-4">
+    <div className="grid h-full grid-rows-[auto_1fr] gap-3 overflow-hidden md:gap-6 xl:grid-cols-3 xl:grid-rows-none">
+      <section className="flex flex-col overflow-hidden md:gap-6 xl:col-span-2">
         <RecordsList trainings={data} />
         <div className="hidden flex-1 overflow-y-auto xl:flex">
           <TrainingsList trainings={data} />
         </div>
       </section>
-      <section className="h-full overflow-hidden xl:col-start-4">
+      <section className="h-full overflow-hidden xl:col-start-3">
         <Statistics trainings={data} />
       </section>
     </div>

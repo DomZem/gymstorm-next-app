@@ -22,8 +22,8 @@ export default function ExercisesPage() {
   });
 
   return (
-    <div className="grid h-full grid-rows-[auto_1fr] gap-3 overflow-hidden md:gap-6 xl:grid-cols-4 xl:grid-rows-[1fr]">
-      <section className="flex flex-col gap-6 overflow-hidden xl:col-start-1 xl:col-end-4">
+    <div className="grid h-full grid-rows-[auto_1fr] gap-3 overflow-hidden md:gap-6 xl:grid-cols-3 xl:grid-rows-none">
+      <section className="flex flex-col gap-6 overflow-hidden xl:col-span-2">
         {isLoading && <LoadingTrainings />}
         {isError && <ErrorTrainings />}
         {!data?.length && !isLoading && <EmptyTrainings />}
@@ -35,7 +35,7 @@ export default function ExercisesPage() {
           </>
         )}
       </section>
-      <section className="h-full overflow-hidden xl:col-start-4">
+      <section className="h-full overflow-hidden xl:col-start-3">
         <ExercisesList />
       </section>
     </div>

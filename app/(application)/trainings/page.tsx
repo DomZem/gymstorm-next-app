@@ -7,14 +7,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import AddTrainingForm from "./components/training/add-training-form";
 import TrainingsList from "./components/trainings-list";
 
 export default function TrainingsPage() {
   return (
-    <div className="grid h-full overflow-hidden xl:gap-6 2xl:grid-cols-3 2xl:grid-rows-[1fr]">
-      <section className="flex flex-col gap-3 overflow-hidden 2xl:col-start-1 2xl:col-end-3">
+    <div className="grid h-full overflow-hidden xl:gap-6 2xl:grid-cols-3 2xl:grid-rows-none">
+      <section className="flex flex-col gap-3 overflow-hidden md:gap-6 2xl:col-span-2">
         <Dialog>
           <Card className="2xl:hidden">
             <CardHeader>
@@ -36,16 +35,15 @@ export default function TrainingsPage() {
 
         <TrainingsList />
       </section>
-      <section className="hidden overflow-hidden 2xl:flex">
-        <Card className="flex h-full flex-1 flex-col overflow-hidden 2xl:col-start-3 2xl:col-end-4">
-          <CardHeader className="border-b">
-            <CardTitle>Add training</CardTitle>
-          </CardHeader>
-          <CardContent className="grow overflow-y-auto p-6">
-            <AddTrainingForm />
-          </CardContent>
-        </Card>
-      </section>
+
+      <Card className="hidden flex-col overflow-hidden 2xl:flex">
+        <CardHeader className="border-b">
+          <CardTitle>Add training</CardTitle>
+        </CardHeader>
+        <CardContent className="grow overflow-y-auto p-6">
+          <AddTrainingForm />
+        </CardContent>
+      </Card>
     </div>
   );
 }
