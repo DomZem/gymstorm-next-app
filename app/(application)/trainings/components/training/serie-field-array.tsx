@@ -39,10 +39,10 @@ export default function SerieFieldArray({
   }, [fields, remove]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <ul className="flex flex-col gap-2">
       {fields.map((item, k) => {
         return (
-          <div key={item.id}>
+          <li key={item.id}>
             <div className="flex gap-2">
               <FormField
                 control={control}
@@ -128,7 +128,7 @@ export default function SerieFieldArray({
                 <MdDelete className="h-4 w-4" />
               </Button>
             </div>
-          </div>
+          </li>
         );
       })}
 
@@ -169,6 +169,6 @@ export default function SerieFieldArray({
           Add previous set
         </Button>
       </div>
-    </div>
+    </ul>
   );
 }

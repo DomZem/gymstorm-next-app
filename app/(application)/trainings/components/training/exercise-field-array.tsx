@@ -34,7 +34,7 @@ export default function ExerciseFieldArray({
           return (
             <li
               key={item.id}
-              className="flex flex-col gap-2 rounded-md bg-primary-foreground p-2"
+              className="relative flex flex-col gap-2 rounded-md bg-primary-foreground p-2"
             >
               <FormField
                 control={control}
