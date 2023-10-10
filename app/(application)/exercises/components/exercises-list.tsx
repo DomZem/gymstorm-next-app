@@ -57,10 +57,11 @@ export default function ExercisesList() {
           <EmptyExercises />
         ) : (
           <ul className="flex h-full flex-col gap-3 overflow-y-auto py-6">
-            {data.map(({ id, name, avatarFallback }) => (
+            {data.map(({ id, name, avatarUrl, avatarFallback }) => (
               <ExercisesListItem
                 id={id}
                 name={name}
+                avatarUrl={avatarUrl}
                 avatarFallback={avatarFallback}
                 key={id}
               />
