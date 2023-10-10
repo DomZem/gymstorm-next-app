@@ -4,11 +4,11 @@ import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 import { UrlObject } from "url";
 
-interface NavLinkProps extends LinkProps<unknown> {
+interface MarketingLinkProps extends LinkProps<unknown> {
   children: React.ReactNode;
 }
 
-export default function NavLink({ href, children }: NavLinkProps) {
+export default function MarketingLink({ href, children }: MarketingLinkProps) {
   const pathName = usePathname();
 
   const isActive =

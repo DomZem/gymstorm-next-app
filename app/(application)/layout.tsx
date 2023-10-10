@@ -1,5 +1,4 @@
 import AppMobileMenu from "@/app/(application)/components/mobile-menu";
-import AppNav from "@/app/(application)/components/nav";
 import AppUserLogin from "@/app/(application)/components/user-login";
 import { ModeToggle } from "@/components/mode-toggle";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
@@ -7,6 +6,7 @@ import logo from "@/public/logo.png";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import Navbar from "./components/navbar";
 export default async function RootLayout({
   children,
 }: {
@@ -35,7 +35,7 @@ export default async function RootLayout({
       <div className="grid-cols-[18rem_1fr] overflow-hidden md:grid">
         <aside className="hidden flex-col justify-between border-r md:flex">
           <section className="p-6">
-            <AppNav />
+            <Navbar />
           </section>
           <section className="border-t">
             <AppUserLogin />

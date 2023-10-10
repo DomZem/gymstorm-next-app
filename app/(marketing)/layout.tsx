@@ -3,7 +3,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 import logo from "@/public/logo.png";
 import Image from "next/image";
-import NavLink from "./components/nav-link";
+import { default as MarketingLink } from "./components/marketing-link";
 import SignInButton from "./components/sign-in-button";
 
 export default function RootLayout({
@@ -26,8 +26,8 @@ export default function RootLayout({
           </div>
 
           <nav className="hidden items-center gap-2 sm:flex">
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/news">News</NavLink>
+            <MarketingLink href="/">Home</MarketingLink>
+            <MarketingLink href="/news">News</MarketingLink>
           </nav>
 
           <div className="hidden items-center gap-2 sm:flex">

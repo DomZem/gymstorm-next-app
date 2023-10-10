@@ -8,7 +8,8 @@ import {
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import { MdMenu } from "react-icons/md";
-import AppNav from "./nav";
+
+import Navbar from "./navbar";
 import AppUserLogin from "./user-login";
 
 export default function MobileMenu() {
@@ -29,7 +30,7 @@ export default function MobileMenu() {
           </SheetHeader>
 
           <div className="mt-6">
-            <AppNav />
+            <Navbar />
           </div>
         </section>
 
