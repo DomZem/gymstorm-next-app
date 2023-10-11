@@ -34,7 +34,7 @@ export default function EmptyExercises() {
       <div className="flex flex-col items-center gap-2 text-center">
         <h4 className="text-xl font-semibold tracking-tight">No exercises</h4>
         <p className="text-sm text-muted-foreground">
-          You don't have any exercises. You have to create at least one to
+          You don&apos;t have any exercises. You have to create at least one to
           create training!
         </p>
       </div>
