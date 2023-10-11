@@ -5,13 +5,18 @@ import {
   LineChart,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 import { ChartData } from "./exercise-progress";
 
 interface ExerciseProgressChartProps {
-  data?: ChartData[];
+  data?: ChartData[] | null;
 }
 
 export default function ExerciseProgressChart({
@@ -78,7 +83,11 @@ export default function ExerciseProgressChart({
   );
 }
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipProps<ValueType, NameType>) => {
   if (active && payload && payload.length) {
     return (
       <Card>

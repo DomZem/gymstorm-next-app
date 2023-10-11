@@ -61,7 +61,7 @@ export default function ExercisesList() {
               <ExercisesListItem
                 id={id}
                 name={name}
-                avatarUrl={avatarUrl}
+                avatarUrl={avatarUrl || undefined}
                 avatarFallback={avatarFallback}
                 key={id}
               />
