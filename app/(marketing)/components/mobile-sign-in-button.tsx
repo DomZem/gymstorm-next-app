@@ -8,7 +8,9 @@ export default function MobileSignInButton() {
     <button
       className="nav-button"
       onClick={() =>
-        signIn("google", { callbackUrl: "http://localhost:3000/dashboard" })
+        signIn("google", {
+          callbackUrl: process.env.NEXT_PUBLIC_DOMAIN_URL + "/dashboard",
+        })
       }
     >
       <MdLogin />
