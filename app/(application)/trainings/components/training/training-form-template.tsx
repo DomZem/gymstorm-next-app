@@ -4,7 +4,6 @@ import EmptyExercises from "@/app/(application)/components/empty-exercises";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -25,7 +24,7 @@ import { ExerciseDetail } from "@prisma/client";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { format } from "date-fns";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import ExerciseFieldArray from "./exercise-field-array";
 import { TrainingType, trainingFormSchema } from "./formSchema";
@@ -53,18 +52,16 @@ export default function TrainingFormTemplte({
     queryKey: ["exercises"],
   });
 
-  const form = useForm<TrainingType>({
+  const methods = useForm<TrainingType>({
     resolver: zodResolver(trainingFormSchema),
     defaultValues,
   });
-
-  const { control, handleSubmit, register, setValue, getValues, reset } = form;
 
   const handleFormSubmit = (data: TrainingType) => {
     onSubmit(data);
 
     if (variant === "add") {
-      reset();
+      methods.reset();
     }
   };
 
@@ -84,10 +81,13 @@ export default function TrainingFormTemplte({
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(handleFormSubmit)}
+        className="space-y-6"
+      >
         <FormField
-          control={control}
+          control={methods.control}
           name="title"
           render={({ field }) => (
             <FormItem>
@@ -101,7 +101,7 @@ export default function TrainingFormTemplte({
         />
 
         <FormField
-          control={control}
+          control={methods.control}
           name="description"
           render={({ field }) => (
             <FormItem>
@@ -119,7 +119,7 @@ export default function TrainingFormTemplte({
         />
 
         <FormField
-          control={form.control}
+          control={methods.control}
           name="date"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -160,7 +160,7 @@ export default function TrainingFormTemplte({
 
         <div className="flex items-center gap-2">
           <FormField
-            control={control}
+            control={methods.control}
             name="hours.hourStart"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -174,7 +174,7 @@ export default function TrainingFormTemplte({
           />
 
           <FormField
-            control={control}
+            control={methods.control}
             name="hours.hourEnd"
             render={({ field }) => (
               <FormItem className="flex-1">
@@ -188,16 +188,7 @@ export default function TrainingFormTemplte({
           />
         </div>
 
-        <ExerciseFieldArray
-          {...{
-            control,
-            register,
-            defaultValues,
-            getValues,
-            setValue,
-            exercisesDetail: data,
-          }}
-        />
+        <ExerciseFieldArray exercisesDetail={data} />
 
         <Button
           className="w-full"
@@ -207,6 +198,6 @@ export default function TrainingFormTemplte({
           {variant === "add" ? "Add" : "Update"} training
         </Button>
       </form>
-    </Form>
+    </FormProvider>
   );
 }

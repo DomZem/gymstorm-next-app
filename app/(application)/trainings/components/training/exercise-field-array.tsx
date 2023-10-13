@@ -14,14 +14,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFieldArray } from "react-hook-form";
+import { ExerciseDetail } from "@prisma/client";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import SerieFieldArray from "./serie-field-array";
 
+interface ExerciseFieldArrayProps {
+  exercisesDetail: ExerciseDetail[];
+}
+
 export default function ExerciseFieldArray({
-  control,
-  register,
   exercisesDetail,
-}) {
+}: ExerciseFieldArrayProps) {
+  const { control } = useFormContext();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "exercises",
@@ -64,7 +69,7 @@ export default function ExerciseFieldArray({
                 )}
               />
 
-              <SerieFieldArray nestIndex={index} {...{ control, register }} />
+              <SerieFieldArray nestIndex={index} />
 
               <Button
                 className="whitespace-nowrap"
