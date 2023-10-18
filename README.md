@@ -6,12 +6,12 @@
 
 <span>
 
-<img src="https://imgur.com/F2nzfHD" title="home page" />
-<img src="https://imgur.com/U2Svt6E" title="dashboard page" />
-<img src="https://imgur.com/X0a8Cl1" title="exercises page" />
-<img src="https://imgur.com/qOfApoE" title="trainings page" />
-<img src="https://imgur.com/g3ifUjD" title="edit training modal" />
-<img src="https://imgur.com/pfOSupn" title="delete training modal" />
+<img src="https://imgur.com/F2nzfHD.png" title="home page" />
+<img src="https://imgur.com/U2Svt6E.png" title="dashboard page" />
+<img src="https://imgur.com/X0a8Cl1.png" title="exercises page" />
+<img src="https://imgur.com/qOfApoE.png" title="trainings page" />
+<img src="https://imgur.com/g3ifUjD.png" title="edit training modal" />
+<img src="https://imgur.com/pfOSupn.png" title="delete training modal" />
 
 </span>
   
