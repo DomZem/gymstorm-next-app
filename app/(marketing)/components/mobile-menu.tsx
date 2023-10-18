@@ -11,7 +11,6 @@ import Image from "next/image";
 import { IoNewspaper } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
-import MobileSignInButton from "./mobile-sign-in-button";
 
 export default function MenuMobile() {
   return (
@@ -41,7 +40,6 @@ export default function MenuMobile() {
                   <IoNewspaper className="text-base" /> News
                 </NavLink>
               </nav>
-              <MobileSignInButton />
             </div>
           </div>
         </section>

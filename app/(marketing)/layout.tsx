@@ -4,7 +4,6 @@ import { ModeToggle } from "@/components/mode-toggle";
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import { default as MarketingLink } from "./components/marketing-link";
-import SignInButton from "./components/sign-in-button";
 
 export default function RootLayout({
   children,
@@ -30,9 +29,8 @@ export default function RootLayout({
             <MarketingLink href="/news">News</MarketingLink>
           </nav>
 
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="hidden sm:block">
             <ModeToggle />
-            <SignInButton />
           </div>
         </div>
       </header>

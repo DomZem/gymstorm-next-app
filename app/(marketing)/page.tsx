@@ -2,6 +2,7 @@ import { BiStats } from "react-icons/bi";
 import { GoGoal } from "react-icons/go";
 import { IoIosFitness } from "react-icons/io";
 import { MdSportsGymnastics } from "react-icons/md";
+import SignInButton from "./components/sign-in-button";
 
 const features = [
   {
@@ -34,8 +35,8 @@ export default function Home() {
   return (
     <div>
       <section className="flex h-screen items-center justify-center">
-        <div className="px-3">
-          <h2 className="mx-auto mb-6 mt-10 max-w-3xl text-center text-5xl font-bold">
+        <div className="flex flex-col items-center gap-6 px-3">
+          <h2 className="mx-auto mt-10 max-w-3xl text-center text-5xl font-bold">
             Easiest way to manage your trainings.
           </h2>
           <p className="mx-auto max-w-3xl text-center text-sm font-medium text-muted-foreground">
@@ -43,6 +44,7 @@ export default function Home() {
             log your workouts and monitor your progress. Simplify your fitness
             journey with GymStorm and reach your goals with ease.
           </p>
+          <SignInButton />
         </div>
       </section>
       <section className="bg-foreground py-24">
